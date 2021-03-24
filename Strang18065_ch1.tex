@@ -120,13 +120,121 @@ $$z \cdot w = \begin{bmatrix}
 
 \item If three corners of a parallelogram are (1,1), (4,2), and (1,3), what are all three of the possible fourth corners? Draw two of them.
 
-By the parallelogram rule of vector addition, we can take the vector represented by any point and add the vectors of the other two points' \emph{differences} to get the fourth point of the parallelogram. Starting at $(1,1)$, we have differences to $(1, 3)$ and $(4,2)$ as follows:
+By the parallelogram rule of vector addition, we can take the vector represented by a point $x$ and add the other two points' \emph{differences} to $x$ to get the fourth point of the parallelogram. Starting at $(1,1)$, we have differences to $(1, 3)$ and $(4,2)$ as follows:
 $$(1,3) - (1,1) = (0, 2), \quad (4,2) - (1,1) = (3,1)$$
 
 so a point that makes a parallelogram would be (1,1) + (0, 2) + (3,1) = (4, 4).
 \begin{center}
 	\includegraphics[width=0.5\textwidth]{imgs/1.1.6.png}
 \end{center}
+
+\item Describe the column space of $A = [v \ w \ v+2w]$. Describe the nullspace of $A$: all vectors $x = (x_1, x_2, x_3)$ that solve $Ax = 0$. Add the ``dimensions'' of that plane (the column space of $A$ and that line (the nullspace of $A$).
+
+Let $C(A)$ denote the column space of $A$. Since the 3rd column is a linear combination of the first 2, $C(A) = C([v, w]) = \text{span}\{v, w\}$. Assuming $w \neq \lambda v$ the null space $N(A) = \{(1, 2, -1)\}$, since for any $x \in N(A) = \lambda(1, 2, -1)$ for some $\lambda$, then 
+$$Ax = \lambda A(1,2,-1) = v + 2w - (v + 2w) = 0$$
+
+$A$ spans a 2-dimensional plane and the nullspace is 1-dimensional, in keeping with rank-nullity.
+
+\item $A = CR$ is a representation of the columns of $A$ in the basis formed by the columns of $C$ with coefficients in $R$. If $A_{ij} = j^2$ is 3 by 3, write down $A$ and $C$ and $R$. 
+
+Given the recipe $A_{ij} = j^2$ we have
+$$A = \begin{bmatrix}
+	1 & 4 & 9 \\	1 & 4 & 9 \\	1 & 4 & 9 \\
+\end{bmatrix}$$
+
+The columns of $A$ are linearly dependent, we may keep the first column for $C$ and then $R$ is the matrix necessary to make $CR = A$:
+$$C = \begin{bmatrix}
+	1 \\ 1 \\ 1
+\end{bmatrix}, \quad R = \begin{bmatrix}
+	1 & 4 & 9
+\end{bmatrix}$$
+
+\item Suppose the column space of an $m \times n$ matrix is all of $\R^3$. What can you say about $m$? What can you say about $n$? What can you say about the rank $r$?
+
+Given the span of a matrix is $\R^3$ it must be $m = 3$ and $n \geq 3$. If $m$, the number of rows, was any less than 3 it would not be able to span $\R^3$ (we omit the possibility that $m > 3$ and it spans a 3-dimensional subspace isomorphic to $\R^3$). Likewise if the number of columns $n$ is less than 3 then the matrix could not have 3 linearly independent vectors, which are necessary to form a minimally spanning set of $\R^3$. Altogether this means the rank $r$ of the matrix is 3.
+
+\item Find the matrices $C_1$ and $C_2$ containing independent columns of $A_1$ and $A_2$:
+
+$$A_1 = \begin{bmatrix}
+	1 & 3 & -2\\3 & 9 & -6\\2 & 6 & -4
+\end{bmatrix}, \qquad A_2 = \begin{bmatrix}
+	1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9
+\end{bmatrix}$$
+
+For $A_1$ we see its second and third columns are multiples of the first. So $C_1 = \begin{bmatrix}
+	1 \\ 3 \\ 2
+\end{bmatrix} $.
+
+For $A_2 = \begin{bmatrix}
+	\mathbf{a}_1 & \mathbf{a}_2 & \mathbf{a}_3
+\end{bmatrix}$ we see the third column is a linear combination of the other two: $\mathbf{a}_3 = 2\mathbf{a}_2 - \mathbf{a}_1$. The first two columns are linearly independent which makes $C_2 = \begin{bmatrix}
+	1 & 2 \\ 4 & 5 \\ 7 & 8
+\end{bmatrix}$
+
+\item Factor each of those matrices into $A = CR$. The matrix $R$ will contain the numbers that multiply the columns of $C$ to recover columns of $A$. 
+
+Having identified which columns are linearly columns of which, we encode that information into $R$:
+$$C_1 = \begin{bmatrix}
+	1 \\ 3 \\ 2
+\end{bmatrix}, \qquad R_1 = \begin{bmatrix}
+		1 & 3 & -2
+\end{bmatrix}$$
+$$ C_2 = \begin{bmatrix}
+	1 & 2 \\ 4 & 5 \\ 7 & 8
+\end{bmatrix}, \qquad R_2 = \begin{bmatrix}
+	1 & 0 & -1 \\ 0 & 1 & 2
+\end{bmatrix}$$
+
+\begin{align*}
+	&\begin{bmatrix}
+		1 & 0 & -1 \\ 0 & 1 & 2
+	\end{bmatrix}\\
+	\begin{bmatrix}
+		1 & 2 \\ 4 & 5 \\ 7 & 8
+	\end{bmatrix}& \begin{bmatrix}
+		1 & 2 & 3 \\
+		4 & 5 & 6\\
+		7 & 8 & 9
+	\end{bmatrix}
+\end{align*}
+
+\item Produce a basis for the column spaces of $A_1$ and $A_2$. What are the dimensions of those columns spaces -- the number of independent vectors? What are the ranks of $A_1$ and $A_2$? How many independent rows in $A_1$ and $A_2$?
+
+By construction the columns of $C_1$ and $C_2$ form bases for $A_1$ and $A_2$ since they are sets of linearly independent vectors that span the column space of the matrix. So we may choose for bases $B_1$ and $B_2$:
+
+$$B_1 = \left\{\begin{bmatrix}
+	1 \\ 3 \\ 2
+\end{bmatrix}\right\}, \qquad B_2 = \left\{\begin{bmatrix}1 \\ 4 \\ 7\end{bmatrix}, \begin{bmatrix}
+	2 \\ 5 \\ 8
+\end{bmatrix}\right\}$$
+
+The dimension of each column space is the number of linearly independent vectors in each basis. Hence $\dim C(A_1) = 1, \dim C(A_2) = 2$. Equivalently, these are the ranks of matrices $A_1$ and $A_2$. Lastly, the rank of $A$ is equal to the rank of $A^\top$ for a square $A$, so the matrices have the same number of independent rows as they do columns.
+
+\item Create a 4 by 4 matrix of rank 2. What shapes are $C$ and $R$? 
+
+Before construction, we know the shape of $C$ will be $4 \times 2$. It must have 4 rows since it much match the original matrix. It will have 2 columns since we're constructing the original matrix to have 2 linearly independent columns.
+
+Let us construct the matrix:
+$$A = \begin{bmatrix}
+	1 & 0 & 1 & -1 \\ 0 & 1 & 1 & -1 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 
+\end{bmatrix}$$
+
+The first two columns of $A$ are independent and the second two are linear combinations of the others. This gives $C$ and $R$:
+
+\begin{align*}
+	&\begin{bmatrix}
+		1 & 0 & 1 & -1 \\ 0 & 1 & 1 & -1
+	\end{bmatrix}\\
+	\begin{bmatrix}
+		1 & 0 \\ 0 & 1 \\ 0 & 0 \\ 0 & 0
+	\end{bmatrix}&\begin{bmatrix}
+	1 & 0 & 1 & -1 \\ 0 & 1 & 1 & -1 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 
+\end{bmatrix}
+\end{align*}
+
+\item Suppose two matrices $A$ and $B$ have the same column space.
+\begin{enumerate}
+	\item Show that their row spaces can be different
 \end{enumerate}
 
 \end{document}
