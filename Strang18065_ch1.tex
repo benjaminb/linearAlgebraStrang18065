@@ -271,5 +271,84 @@ So even though the column spaces of $A$ and $B$ are equal, their basic column ma
 $A$ and $B$ have the same column space which means they both span the same linear subspace, and $A$ and $B$ have the same \emph{rank}. By the rank nullity theorem the dimension of their null space will also be the same.
 
 \end{enumerate}
+
+\item If $A = CR$, the first row of $A$ is a combination of the rows of $R$. Which part of which matrix holds the coefficients in that combination -- the numbers that multiply the rows of $R$ to produce row 1 of $A$?
+
+The first row of $C$ gives the coefficients for the linear combination of $R$ rows that yield the first row of $A$. 
+
+\begin{align*}
+&\left[
+  \begin{array}{ccc}
+  	\horzbar & r_1 & \horzbar \\
+  	& \vdots & \\
+  	\horzbar & r_m & \horzbar \\
+  \end{array}
+  \right]\\
+CR = \begin{bmatrix} c_{11} & \ldots & c_{1m} \\
+		\vdots & \ddots & \\
+		c_{n1} & \ldots & c_{nm}\end{bmatrix}& 
+	\begin{bmatrix}
+		\horzbar & \sum c_{1i}\mathbf{r}_i & \horzbar\\
+		& & \\
+		& & 
+	\end{bmatrix}
+\end{align*}
+
+ \item The rows of $R$ are a basis for the row space of $A$. \emph{What does that sentence mean?}
+
+A basis a minimal set of linearly independent vectors that span a subspace. Taking each row of $R$ to be a vector, the statement means that the $R$ rows will be linearly independent and will span the row space of the matrix $A$.
+
+\item For these matrices with square blocks, find $A = CR$. What ranks?
+
+$$A_1 =\begin{bmatrix}
+	\text{zeros} & \text{ones} \\
+	\text{ones} & \text{ones}
+\end{bmatrix}_{4 \times 4}, \quad
+A_2 = \begin{bmatrix}
+	A_1 \\ A_1
+\end{bmatrix}_{8 \times 4}, \quad 
+A_3 = \begin{bmatrix}
+	A_1 & A_1 \\ A_1 & A_1
+\end{bmatrix}_{8 \times 8}$$
+
+Writing out $A_1$ explicitly, we see that columns 1 and 3 are linearly independent:
+$$A_1 = \begin{bmatrix}
+	0 & 0 & 1 & 1 \\ 0 & 0 & 1 & 1 \\1 & 1 & 1 & 1\\1 & 1 & 1 & 1
+\end{bmatrix}$$
+
+Thus its $C$ matrix will be $\begin{bmatrix}
+	0 & 1 \\ 0 & 1 \\ 1 & 1 \\ 1 & 1
+\end{bmatrix}$. The row matrix $R$ necessary to make $CR = A$ is then $R = \begin{bmatrix}
+	1 & 1 & 0 & 0 \\ 0 & 0 & 1 & 1 \end{bmatrix}$
+
+For $A_2$, we see this is two copies of $A_1$ stacked vertically. Again its first and third columns are linearly independent, the second column is a copy of the first and the fourth is a copy of the third. So it has the same row matrix $R$ as before but the $C$ matrix is now:
+$$C = \begin{bmatrix}
+	0 & 1 \\ 0 & 1 \\ 1 & 1 \\ 1 & 1 \\0 & 1 \\ 0 & 1 \\ 1 & 1 \\ 1 & 1 
+\end{bmatrix}$$
+
+For $A_3$, we see it is two copies of $A_2$ stacked horizontally. As such it will have the same column space as $A_2$ and the same $C$ matrix will be factored as $A_2$. The row matrix $R$ becomes two copies of the previous row matrix stacked horizontally: $[R \ R]$.
+
+\item ``Elimination'' subtracts a number $\ell_{ij}$ times row $j$ from row $i$: a ``row operation.'' Show how those steps can reduce the matrix $A$ in Example 4 to $R$ (except that this row echelon form $R$ has a row of zeros). The rank won't change!
+
+$$A = \begin{bmatrix}
+	1 & 3 & 8 \\ 1 & 2 & 6 \\ 0 & 1 & 2
+\end{bmatrix}\rightarrow \ \rightarrow \ R = \begin{bmatrix}
+	1 & 0 & 2 \\ 0 & 1 & 2 \\ 0 & 0 & 0
+\end{bmatrix} = \textbf{rref}(A)$$
+
+One possible rref sequence is:
+$$\begin{bmatrix}
+	1 & 3 & 8 \\ 1 & 2 & 6 \\ 0 & 1 & 2
+\end{bmatrix} \stackrel{1_{21}}{\rightarrow} \begin{bmatrix}
+	1 & 3 & 8 \\ 0 & -1 & -2 \\ 0 & 1 & 2
+\end{bmatrix} \stackrel{-2_{22}}{\rightarrow} \begin{bmatrix}
+	1 & 3 & 8 \\ 0 & 1 & 2 \\ 0 & 1 & 2 
+\end{bmatrix} \stackrel{1_{32}}{\rightarrow} \begin{bmatrix}
+	1 & 3 & 8 \\ 0 & 1 & 2 \\ 0 & 0 & 0
+\end{bmatrix}$$
+$$\stackrel{3_{21}}{\rightarrow} \begin{bmatrix}
+	1 & 0 & 2 \\ 0 & 1 & 2 \\ 0 & 0 & 0
+\end{bmatrix}$$
+
 \end{enumerate}
 \end{document}
