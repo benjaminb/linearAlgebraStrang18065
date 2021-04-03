@@ -7,6 +7,7 @@
 \usepackage{mathpazo}
 \usepackage{graphicx}
 \usepackage{mathrsfs}
+\usepackage{nicefrac}
 \newcommand{\R}{\mathbb{R}}
 
 \newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
@@ -328,6 +329,25 @@ $$C = \begin{bmatrix}
 
 For $A_3$, we see it is two copies of $A_2$ stacked horizontally. As such it will have the same column space as $A_2$ and the same $C$ matrix will be factored as $A_2$. The row matrix $R$ becomes two copies of the previous row matrix stacked horizontally: $[R \ R]$.
 
+\item If $A=CR$, what are the $CR$ factors of the matrix $\begin{bmatrix}
+	0 & A \\ 0 & A
+\end{bmatrix}$?
+
+Stacking matrices vertically doesn't change which columns are extracted for its $C$ matrix, and the 0 matrix has no linearly independent columns. Then the $CR$ decomposition is
+
+\begin{align*}
+	&\begin{bmatrix}
+		0 & R
+	\end{bmatrix}\\
+	\begin{bmatrix}
+	0 & C \\ 0 & C
+\end{bmatrix} &\begin{bmatrix}
+	0 & CR \\ 0 & CR
+\end{bmatrix} = \begin{bmatrix}
+	0 & A \\ 0 & A
+\end{bmatrix}
+\end{align*}
+
 \item ``Elimination'' subtracts a number $\ell_{ij}$ times row $j$ from row $i$: a ``row operation.'' Show how those steps can reduce the matrix $A$ in Example 4 to $R$ (except that this row echelon form $R$ has a row of zeros). The rank won't change!
 
 $$A = \begin{bmatrix}
@@ -350,5 +370,132 @@ $$\stackrel{3_{21}}{\rightarrow} \begin{bmatrix}
 	1 & 0 & 2 \\ 0 & 1 & 2 \\ 0 & 0 & 0
 \end{bmatrix}$$
 
+\item Show that the equation (*) produces $\mathbf{M} = [\frac{1}{2}]$ in the example above.
+
+The equation (*) is
+$$\mathbf{M} = (\mathbf{C}^\top \mathbf{C})^{-1}(\mathbf{C}^\top \mathbf{A}\mathbf{R}^\top)(\mathbf{R}\mathbf{R}^\top)^{-1}$$
+
+$$\mathbf{C} = \begin{bmatrix}
+	2 \\ 3
+\end{bmatrix}, \quad \mathbf{R} = \begin{bmatrix}
+	2 & 4
+\end{bmatrix}, \quad \mathbf{M} = [1/2]$$
+
+$$(\mathbf{C}^\top \mathbf{C})^{-1} = \left([2 \ 3] \begin{bmatrix}
+	2 \\ 3
+\end{bmatrix}\right)^{-1} = (13)^{-1} = \frac{1}{13}$$
+$$(\mathbf{R}\mathbf{R}^\top)^{-1} = \left([2 \ 4]\begin{bmatrix}
+	2 \\ 4
+\end{bmatrix}\right)^{-1} = (20)^{-1} = \frac{1}{20}$$
+\begin{align*}
+	\mathbf{C}^\top \mathbf{A}\mathbf{R}^\top = \begin{bmatrix}
+		2 & 3
+	\end{bmatrix}\begin{bmatrix}
+		2 & 4 \\ 3 & 6
+	\end{bmatrix}\begin{bmatrix}
+		2 & 4
+	\end{bmatrix} = 130
+\end{align*}
+$$\mathbf{M} = \frac{1}{13}\cdot 130 \cdot \frac{1}{20} = [1/2]$$
+
+\item The rank-2 example in the text produced $A = CR$ in equation (2):
+$$A = \begin{bmatrix}
+	1 & 3 & 8 \\ 1 & 2 & 6 \\ 0 & 1 & 2
+\end{bmatrix} = \begin{bmatrix}
+	1 & 3 \\ 1 & 2 \\ 0 & 1
+\end{bmatrix} \begin{bmatrix}
+	1 & 0 & 2 \\ 0 & 1 & 2
+\end{bmatrix} = \mathbf{C}R$$
+
+Choose rows 1 and 2 directly from $A$ to go into $\mathbf{R}$. Then from equation (*), find the 2 by 2 matrix $\mathbf{M}$ that produces $A = \mathbf{CMR}$. 
+
+We choose the first two linearly independent rows from $A$, making $\mathbf{R} = \begin{bmatrix}
+	1 & 3 & 8 \\ 1 & 2 & 6
+\end{bmatrix}$.
+
+We then apply the equation $\mathbf{M} = (\mathbf{C}^\top \mathbf{C})^{-1}(\mathbf{C}^\top \mathbf{AR}^\top)(\mathbf{RR}^\top)^{-1}$ to compute $\mathbf{M}$:
+$$\mathbf{C}^\top \mathbf{C} = \begin{bmatrix}
+	2 & 5 \\ 5 & 14
+\end{bmatrix}, \quad (\mathbf{C}^\top \mathbf{C})^{-1} = \frac{1}{3}\begin{bmatrix}
+	14 & -5 \\ -5 & 2
+\end{bmatrix}$$
+
+$$\mathbf{RR}^\top = \begin{bmatrix}
+	74 & 55 \\ 55 & 51
+\end{bmatrix}, \quad (\mathbf{RR}^\top)^{-1} = \frac{1}{9}\begin{bmatrix}
+	41 & -55 \\ -55 & 74
+\end{bmatrix}$$
+
+$$\mathbf{C}^\top \mathbf{AR}^\top = \begin{bmatrix}
+	129 & 96 \\ 351 & 261
+\end{bmatrix}$$
+
+Then $\mathbf{M} = \begin{bmatrix}
+	-2 & 3 \\ 1 & - 1
+\end{bmatrix}$. We can verify that $A = \mathbf{CMR}$:
+$$\mathbf{CMR} = \begin{bmatrix}
+	1 & 3 \\ 1 & 2 \\ 0 & 1
+\end{bmatrix}\begin{bmatrix}
+	-2 & 3 \\ 1 & -1
+\end{bmatrix} \mathbf{R} = \begin{bmatrix}
+	1 & 0 \\ 0 & 1 \\ 1 & -1
+\end{bmatrix}\begin{bmatrix}
+	1 & 3 & 8 \\ 1 & 2 & 6
+\end{bmatrix} = \begin{bmatrix}
+	1 & 3 & 8 \\ 1 & 2 & 6 \\ 0 & 1 & 2
+\end{bmatrix} = A$$
+
+\item Show that the formula to invert a 2 by 2 matrix breaks down if $\begin{bmatrix}
+	b \\ d
+\end{bmatrix} = m \begin{bmatrix}
+	a \\ c
+\end{bmatrix}$.
+
+Given the matrix $A = \begin{bmatrix}
+	a & b \\ c & d
+\end{bmatrix}$, if $\begin{bmatrix}
+	b \\ d
+\end{bmatrix} = m \begin{bmatrix}
+	a \\ c
+\end{bmatrix}$ then the columns are linearly dependent. This will mean the determinant is 0:
+$$A = \begin{bmatrix}
+	a & ma \\ c & mc
+\end{bmatrix} \implies \det(A) = amc - mac = 0.$$
+
+This means the inversion formula will be undefined, since it divides by 0.
+
+\item Create a 3 by 2 matrix $A$ with rank 1. Factor $A$ into $A = CR$ and $A = \mathbf{CMR}$.
+
+
+Let $A = \begin{bmatrix}
+	1 & 2 \\ 1 & 2 \\ 1 & 2
+\end{bmatrix}$. Then $C = \begin{bmatrix}
+	1 \\ 1 \\ 1
+\end{bmatrix}$. The matrix $R$ necessary to recreate $A$ is then $\begin{bmatrix}
+	1 & 2
+\end{bmatrix}$:
+
+$$CR = \begin{bmatrix}
+	1 \\ 1 \\ 1
+\end{bmatrix}\begin{bmatrix}
+	1 & 2
+\end{bmatrix} = \begin{bmatrix}
+	1 & 2 \\ 1 & 2 \\ 1 & 2
+\end{bmatrix}$$
+
+Since $R$ happens to be a row of $A$, we can set $R = \mathbf{R}$ and $\mathbf{C} = C$. Then $\mathbf{M} = [1]$
+
+\item Create a 3 by 2 matrix $A$ with rank 2. Factor $A$ into $A = \mathbf{CMR}$.
+
+
+Let $A = \begin{bmatrix}
+	1 & 1 \\ 0 & 1 \\ 1 & 0
+\end{bmatrix}$. The columns are linearly independent so $C = A$. This means the row matrix necessary to multiply $C$ to make $A$ is just the identity $I_2$, since $C$ already equals $A$. Therefore $R = I_2$.
+
+To factor into $\mathbf{CMR}$, we have again $\mathbf{C} = C$. Since $\mathbf{R}$ must come from the rows of $A$ we have $\mathbf{R} = \begin{bmatrix}
+	1 & 1 \\ 0 & 1
+\end{bmatrix}$, the first two linearly independent rows of $A$. Rather than computing all the products and inverses to calculate $\mathbf{M}$, we can observe that $\mathbf{C} = A$ which means $\mathbf{MR} = I$. This implies $\mathbf{M} = \mathbf{R}^{-1}$ in this case. Computing $\mathbf{R}^{-1}$ gives $M = \begin{bmatrix}
+	1 & - 1 \\ 0 & 1
+\end{bmatrix} $.
 \end{enumerate}
 \end{document}
